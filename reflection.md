@@ -8,13 +8,13 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
 
-- During the first game, Attempts Left is 1 off. Attempts also shows 1.
+- During the first game, Attempts Left is 1 off. Attempts also shows 1.**
 - Score inconsistently decreases. Sometimes its -5 each turn, so -35 total. Other times, this becomes -25 total. I think the score goes down if its lower than the target, and it goes higher if its higher than the target.
 - New Game changes the secret and attempts, but the "Game over. Start a new game to try again." error doesn't go away, keeping you from submitting new entries in the new game. The same happens even if you win.**
 - New Game does not reset the score or history.
 - Hints are wrong. Sometimes right at certain numbers like '9.'**
 - History does not show what you submitted when you submit. It only shows the previous submission AFTER submitting the current one (this might not be a bug; could be intentional).
-- Number of attempts should be highest on easy. But normal has 7 attempts and easy has 5. Range should be highest on hard. But normal has 1-100 while hard has 1-50.
+- Number of attempts should be highest on easy. But normal has 7 attempts and easy has 5. Range should be highest on hard. But normal has 1-100 while hard has 1-50.**
 - Numbers out of range are allowed to be guessed.
 
 ## 2. How did you use AI as a teammate?

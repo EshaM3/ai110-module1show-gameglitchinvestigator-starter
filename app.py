@@ -21,9 +21,10 @@ difficulty = st.sidebar.selectbox(
     index=1,
 )
 
+# FIX: Difficulty fixed manually (straightforward solution)
 attempt_limit_map = {
-    "Easy": 6,
-    "Normal": 8,
+    "Easy": 8,
+    "Normal": 6,
     "Hard": 5,
 }
 attempt_limit = attempt_limit_map[difficulty]
@@ -36,8 +37,9 @@ st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
+# FIX: Starting attempts fixed manually (straightforward solution)
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
