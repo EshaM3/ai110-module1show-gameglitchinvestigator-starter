@@ -9,9 +9,9 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   (for example: "the secret number kept changing" or "the hints were backwards").
 
 - During the first game, Attempts Left is 1 off. Attempts also shows 1.**
-- Score inconsistently decreases. Sometimes its -5 each turn, so -35 total. Other times, this becomes -25 total. I think the score goes down if its lower than the target, and it goes higher if its higher than the target.
+- Score inconsistently decreases. Sometimes its -5 each turn, so -35 total. Other times, this becomes -25 total. I think the score goes down if its lower than the target, and it goes higher if its higher than the target.**
 - New Game changes the secret and attempts, but the "Game over. Start a new game to try again." error doesn't go away, keeping you from submitting new entries in the new game. The same happens even if you win.**
-- New Game does not reset the score or history.
+- New Game does not reset the score or history.**
 - Hints are wrong. Sometimes right at certain numbers like '9.'**
 - History does not show what you submitted when you submit. It only shows the previous submission AFTER submitting the current one (this might not be a bug; could be intentional).
 - Number of attempts should be highest on easy. But normal has 7 attempts and easy has 5. Range should be highest on hard. But normal has 1-100 while hard has 1-50.**
@@ -21,6 +21,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
   - GitHub Copilot
+  - Used Claude Code later (this current commit, my 3rd push) due to spending all Copilot credits
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
   - I was wondering why the hints weren't purely inverted (instead of just saying the user needs to go higher if the number was greater than secret or vice versa, it would sometimes give the correct answer or the same answer would switch between turns) and also why there was a try/catch for type errors when comparing the secret value to the input. So, when I asked Copilot, it alerted me on other lines in the #codebase that showed that the secret would be converted to a string on every even turn, reversing the comparison order sometimes. It gave me an example: "11" < "2" since 1 comes before 2 in ASCII and strings compare bit by bit. This further helped me both eliminate complexity and fully resolve the error.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).

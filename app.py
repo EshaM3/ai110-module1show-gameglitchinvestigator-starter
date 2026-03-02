@@ -80,6 +80,9 @@ with col3:
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
+    #FIX: Erased history and reset score. Completed using Inline Copilot Agent mode.
+    st.session_state.history = []
+    st.session_state.score = 0
     #FIX: Switched the session state status to "playing" so that the game will actually restart. Completed using Copilot Agent mode.
     st.session_state.status = "playing"
     st.success("New game started.")

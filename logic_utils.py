@@ -58,14 +58,14 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
     #FIX: Refactored update_score into logic_utils.py using Copilot Agent mode
     """Update score based on outcome and attempt number."""
     if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
+        # FIX: Scoring formula fixed so that you lose points after the first guess. Not immediately. Done manually (straightforward solution) but with insight from Claude Code.
+        points = 100 - 10 * (attempt_number - 1)
         if points < 10:
             points = 10
         return current_score + points
 
+    # FIX: "Too High" no longer alternates between adding and subtracting points. Completed manually (straightforward solution) but with insight from Claude Code.
     if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
         return current_score - 5
 
     if outcome == "Too Low":
