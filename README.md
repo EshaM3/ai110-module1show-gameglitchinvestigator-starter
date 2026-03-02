@@ -26,12 +26,29 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
+   - It is a simple number guessing game with 3 difficulties that vary in range of numbers to guess from and number of attempts.
 - [ ] Detail which bugs you found.
+   - During the first game, Attempts Left is 1 off. Attempts also shows 1.
+   - Inconsistent scoring. If an input is higher than the secret number, it will alternate between increasing by 5 and decreasing by 5.
+   - New Game changes the secret and attempts, but the "Game over. Start a new game to try again." error doesn't go away, keeping you from submitting new entries in the new game. The same happens even if you win.
+   - New Game does not reset the score or history.
+   - Hints are sometimes wrong. Sometimes right. Inconsistent hints.
+   - Number of attempts should be highest on easy. But normal has 7 attempts and easy has 5. Range should be highest on hard. But normal has 1-100 while hard has 1-50.
+   - Numbers out of range are allowed to be guessed.
+   - Invalid inputs are still kept in history and still use attempts
+   - Winning score started out as 80 instead of 100
 - [ ] Explain what fixes you applied.
+   - Attempts now starts at 0 from the beginning.
+   - Score always decreases by 5 if higher or lower
+   - New game button makes win/lose popups disappear and allows the game to restart
+   - Number of attempts and number ranges now make sense with difficulty type
+   - Numbers out of range are invalid
+   - Invalid inputs don't count as attempts and are not kept in history
+   - Winning score starts out as 100
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- [ ] [fixed, winning game](image.png)
 
 ## 🚀 Stretch Features
 

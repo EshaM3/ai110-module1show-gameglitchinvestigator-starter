@@ -14,6 +14,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - New Game does not reset the score or history.**
 - Hints are wrong. Sometimes right at certain numbers like '9.'**
 - History does not show what you submitted when you submit. It only shows the previous submission AFTER submitting the current one (this might not be a bug; could be intentional).
+  - I learned that this cannot be fixed without inviting several more bugs. It is already functional as is. (You would need to add st.rerun() to update the already-loaded old info, but it is hard to place this line without wiping out key functional popup messages for winning, losing, or providing hints. One can possibly do this by storing in a session_state, but the issue is not much of an issue in the first place. More of a preference).
 - Number of attempts should be highest on easy. But normal has 7 attempts and easy has 5. Range should be highest on hard. But normal has 1-100 while hard has 1-50.**
 - Numbers out of range are allowed to be guessed.**
 - Invalid inputs are still kept in history and still use attempts**
@@ -26,7 +27,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
   - I was wondering why the hints weren't purely inverted (instead of just saying the user needs to go higher if the number was greater than secret or vice versa, it would sometimes give the correct answer or the same answer would switch between turns) and also why there was a try/catch for type errors when comparing the secret value to the input. So, when I asked Copilot, it alerted me on other lines in the #codebase that showed that the secret would be converted to a string on every even turn, reversing the comparison order sometimes. It gave me an example: "11" < "2" since 1 comes before 2 in ASCII and strings compare bit by bit. This further helped me both eliminate complexity and fully resolve the error.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
-  - This didn't happen too often, but it gave me updated pytests for functions that I just asked to be refactored to logic_utils. Any time I refactored it would automatically do that, even though nothing had been fixed/modified in some of these functions. I briefly read through them but knew it wouldn't make much sense to accept the changes without modifying the functions first.
+  - When I updated something manually, the formula for the number of points granted when you win, Claude flagged it as incorrect. It was 100 - 10 * (number of attempts + 1) originally. I changed it to It was 100 - 10 * (number of attempts - 1) after hearing Claude's general insights but not directly asking it for edits. It thought my code would allow for 110 to be a score if number of attempts was 0. But when you submit a winning answer in your first attempt, that attempt would be 1. So a value of 110 would never be reached. I wrote that calculation to Claude to verify my thinking, and it agreed/rerouted its thinking.
 
 ## 3. Debugging and testing your fixes
 
@@ -41,14 +42,18 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 4. What did you learn about Streamlit and state?
 
 - In your own words, explain why the secret number kept changing in the original app.
+  - The number itself wasn't necessarily changing. Just the type of data. Every even attempt, the secret number was being converted into a string because a few lines of code had it set as such.
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+  - Reruns refreshes the page with the updated data values. But this will also wipe popup messages that were previously on screen. Session state just refers to the current collection of data values in your session of the site. You access it to update data.
 - What change did you make that finally gave the game a stable secret number?
-
----
+  Changing the alternating type-change to just "secret = st.session_state.secret" in line 109 of app.py.
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+    - Asking AI to see all the lines that concern an issue and why it's working that way. It saves a lot of time trying to decipher syntax and run around looking for connections between files, allowing me more headspace for quick problem-solving.
 - What is one thing you would do differently next time you work with AI on a coding task?
+  - Make sure to consistently keep issues separate as in asking AI about certain issues in separate chat windows. Because, as I sometimes forgot to do so, I was running into small areas of confusion.
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+  - It really does provide stress-relieving benefits in terms of removing the struggle phase to understand giant blocks of code. And it does help with automating menial tasks like refactoring functions to a new, more organized file.
