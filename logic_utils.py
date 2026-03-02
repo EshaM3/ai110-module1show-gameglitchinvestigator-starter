@@ -1,26 +1,73 @@
 def get_range_for_difficulty(difficulty: str):
+    #FIX: Refactored get_range_for_difficulty into logic_utils.py using Copilot Agent mode
     """Return (low, high) inclusive range for a given difficulty."""
-    raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
+    if difficulty == "Easy":
+        return 1, 20
+    if difficulty == "Normal":
+        return 1, 100
+    if difficulty == "Hard":
+        return 1, 50
+    return 1, 100
 
 
 def parse_guess(raw: str):
+    #FIX: Refactored parse_guess into logic_utils.py using Copilot Agent mode
     """
     Parse user input into an int guess.
 
     Returns: (ok: bool, guess_int: int | None, error_message: str | None)
     """
-    raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
+    if raw is None:
+        return False, None, "Enter a guess."
+
+    if raw == "":
+        return False, None, "Enter a guess."
+
+    try:
+        if "." in raw:
+            value = int(float(raw))
+        else:
+            value = int(raw)
+    except Exception:
+        return False, None, "That is not a number."
+
+    return True, value, None
 
 
 def check_guess(guess, secret):
+    #FIX: Refactored and modified check_guess into logic_utils.py using Copilot Agent mode
     """
-    Compare guess to secret and return (outcome, message).
-
-    outcome examples: "Win", "Too High", "Too Low"
+    The old implementation tried to alternate the type of `secret` between
+    `int` and `str` and even wrapped the comparison in a `try/except` block.
+    That behavior was causing the secret number to appear to change, so we
+    always treat the secret as an integer and use straightforward
+    comparisons.  If the guess is too high, we tell the player to go lower;
+    if the guess is too low, we tell the player to go higher.
     """
-    raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
+    if guess == secret:
+        return "Win", "🎉 Correct!"
+    elif guess > secret:
+        return "Too High", "📈 Go LOWER!"
+    else:
+        # guess < secret
+        return "Too Low", "📉 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
+    #FIX: Refactored update_score into logic_utils.py using Copilot Agent mode
     """Update score based on outcome and attempt number."""
-    raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
+    if outcome == "Win":
+        points = 100 - 10 * (attempt_number + 1)
+        if points < 10:
+            points = 10
+        return current_score + points
+
+    if outcome == "Too High":
+        if attempt_number % 2 == 0:
+            return current_score + 5
+        return current_score - 5
+
+    if outcome == "Too Low":
+        return current_score - 5
+
+    return current_score
