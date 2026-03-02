@@ -41,6 +41,8 @@ It wrote the code, ran away, and now the game is unplayable.
    - Attempts now starts at 0 from the beginning.
    - Score always decreases by 5 if higher or lower
    - New game button makes win/lose popups disappear and allows the game to restart
+   - New game button resets score and history
+   - Hints now make sense in relation to what secret is and the user's input
    - Number of attempts and number ranges now make sense with difficulty type
    - Numbers out of range are invalid
    - Invalid inputs don't count as attempts and are not kept in history
