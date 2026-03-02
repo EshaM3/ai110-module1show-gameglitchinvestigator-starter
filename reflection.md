@@ -15,7 +15,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - Hints are wrong. Sometimes right at certain numbers like '9.'**
 - History does not show what you submitted when you submit. It only shows the previous submission AFTER submitting the current one (this might not be a bug; could be intentional).
 - Number of attempts should be highest on easy. But normal has 7 attempts and easy has 5. Range should be highest on hard. But normal has 1-100 while hard has 1-50.**
-- Numbers out of range are allowed to be guessed.
+- Numbers out of range are allowed to be guessed.**
+- Invalid inputs are still kept in history and still use attempts**
 
 ## 2. How did you use AI as a teammate?
 

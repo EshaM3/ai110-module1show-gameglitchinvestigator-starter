@@ -96,14 +96,14 @@ if st.session_state.status != "playing":
     st.stop()
 
 if submit:
-    st.session_state.attempts += 1
-
-    ok, guess_int, err = parse_guess(raw_guess)
+    ok, guess_int, err = parse_guess(raw_guess, low, high)
 
     if not ok:
-        st.session_state.history.append(raw_guess)
+        # FIX: Removed keeping invalid guess in history. Completed manually but with insight from Claude Code.
         st.error(err)
     else:
+        # FIX: Moved attempt increment here to not accept invalid inputs. Completed manually but with insight from Claude Code.
+        st.session_state.attempts += 1
         st.session_state.history.append(guess_int)
         #FIX: secret is always stored as an integer now using Copilot Agent mode
         secret = st.session_state.secret

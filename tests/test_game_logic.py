@@ -22,21 +22,22 @@ def test_guess_too_low():
 
 # --- update_score tests ---
 
-def test_win_first_attempt_scores_80():
-    # FIX: formula uses (attempt_number + 2), so first guess (attempt 0) earns 80, not 90
-    assert update_score(0, "Win", 0) == 80
+def test_win_first_attempt_scores_100():
+    # attempts is incremented before update_score is called, so attempt_number is always >= 1
+    # FIX: formula is 100 - 10*(attempt_number - 1), so first real attempt (1) earns 100
+    assert update_score(0, "Win", 1) == 100
 
-def test_win_second_attempt_scores_70():
+def test_win_second_attempt_scores_90():
     # Each additional attempt drops the reward by 10
-    assert update_score(0, "Win", 1) == 70
+    assert update_score(0, "Win", 2) == 90
 
 def test_win_score_floor_is_10():
-    # At attempt 8: 100 - 10*(8+2) = 0 → clamped to 10
-    assert update_score(0, "Win", 8) == 10
+    # At attempt 11: 100 - 10*(11-1) = 0 → clamped to 10
+    assert update_score(0, "Win", 11) == 10
 
 def test_win_adds_to_existing_score():
     # Points are added on top of whatever the current score is
-    assert update_score(50, "Win", 0) == 130
+    assert update_score(50, "Win", 1) == 150
 
 def test_too_high_always_subtracts_on_even_attempt():
     # FIX: "Too High" previously added 5 on even attempts; it should always subtract 5
